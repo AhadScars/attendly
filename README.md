@@ -103,4 +103,3 @@ Without those two files the product still runs; the parent app polls the school 
 - Enable / disable / delete schools
 
 Passwords are hashed. Database stays local for now.
-#

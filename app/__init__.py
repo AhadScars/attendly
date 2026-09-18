@@ -4,7 +4,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from flask import Flask, request
+from flask import Flask, redirect, request
 
 from app import config
 from app.seed import seed_if_empty
@@ -49,16 +49,9 @@ def create_app() -> Flask:
         if request.method == "OPTIONS":
             return ("", 204)
         # Login can still open; school pages use the local queue if the cloud drops later.
-        if not configured() and request.endpoint not in {"static"}:
-            return (
-                "<!doctype html><title>Attendly</title>"
-                "<body style='font-family:Segoe UI,sans-serif;padding:40px;max-width:640px'>"
-                "<h2>Connect Supabase</h2>"
-                "<p>Put <code>SUPABASE_URL</code> and <code>SUPABASE_SERVICE_KEY</code> "
-                "in a <code>.env</code> file next to Attendly, then restart.</p>"
-                "<p>SQL: <code>supabase/schema.sql</code></p></body>",
-                503,
-            )
+        allowed = {"static", "auth.setup", "auth.setup_school", "auth.setup_owner"}
+        if not configured() and request.endpoint not in allowed:
+            return redirect("/setup")
 
     @app.context_processor
     def queue_status():

@@ -43,6 +43,14 @@ def lan_url() -> str:
 
 
 def main() -> None:
+    remote = config.remote_server_url()
+    if remote:
+        print("School client mode — opening", remote)
+        print("No keys on this PC.")
+        webbrowser.open(remote)
+        input("Press Enter to close...")
+        return
+
     app = create_app()
     local = f"http://127.0.0.1:{config.PORT}"
     print("=" * 56)

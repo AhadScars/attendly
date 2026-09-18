@@ -12,6 +12,16 @@ def app_root() -> Path:
     return Path(__file__).resolve().parent.parent
 
 
+def private_dir() -> Path:
+    """Secrets live here — never inside a folder you zip and send."""
+    if sys.platform == "win32" and os.environ.get("LOCALAPPDATA"):
+        path = Path(os.environ["LOCALAPPDATA"]) / "Attendly"
+    else:
+        path = Path.home() / ".local" / "share" / "attendly"
+    path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
 def _parse_env_text(text: str) -> dict[str, str]:
     out: dict[str, str] = {}
     for raw in text.splitlines():
@@ -36,10 +46,10 @@ def _read_env_file(path: Path) -> dict[str, str]:
 
 
 def env_file_candidates() -> list[Path]:
-    roots = []
+    # AppData first so a shared EXE folder never needs .env inside it.
+    roots = [private_dir(), app_root()]
     if getattr(sys, "frozen", False):
         roots.append(Path(sys.executable).resolve().parent)
-    roots.append(app_root())
     try:
         roots.append(Path.cwd())
     except OSError:
@@ -80,6 +90,43 @@ def load_env() -> None:
 
 load_env()
 
+
+def client_config_path() -> Path:
+    return private_dir() / "client.json"
+
+
+def remote_server_url() -> str:
+    path = client_config_path()
+    if not path.is_file():
+        return ""
+    try:
+        import json
+
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return str(data.get("remote") or "").strip().rstrip("/")
+    except Exception:
+        return ""
+
+
+def save_remote_server(url: str) -> None:
+    import json
+
+    path = client_config_path()
+    path.write_text(json.dumps({"remote": url.strip().rstrip("/")}), encoding="utf-8")
+
+
+def save_owner_env(url: str, service_key: str, secret: str = "") -> Path:
+    dest = private_dir() / ".env"
+    lines = [
+        f"SUPABASE_URL={url.strip()}",
+        f"SUPABASE_SERVICE_KEY={service_key.strip()}",
+        f"ATTENDLY_SECRET={(secret or os.environ.get('ATTENDLY_SECRET') or 'attendly-change-me-before-production').strip()}",
+        "",
+    ]
+    dest.write_text("\n".join(lines), encoding="utf-8")
+    return dest
+
+
 ROOT = app_root()
 EXPORTS_DIR = ROOT / "exports"
 TIMEZONE = os.environ.get("ATTENDLY_TZ", "").strip()
@@ -90,15 +137,17 @@ def resolve_fcm_credentials() -> Path:
     candidates = []
     if env:
         candidates.append(Path(env))
+    priv = private_dir()
     candidates.extend(
         [
+            priv / "firebase" / "firebase-adminsdk.json",
+            priv / "firebase-adminsdk.json",
             ROOT / "data" / "firebase-adminsdk.json",
             ROOT / "firebase" / "firebase-adminsdk.json",
             ROOT / "firebase-adminsdk.json",
             Path(sys.executable).resolve().parent / "data" / "firebase-adminsdk.json",
             Path(sys.executable).resolve().parent / "firebase" / "firebase-adminsdk.json",
             Path(sys.executable).resolve().parent / "firebase-adminsdk.json",
-            Path.home() / ".local" / "share" / "attendly" / "firebase-adminsdk.json",
         ]
     )
     for path in candidates:
