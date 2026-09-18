@@ -1,0 +1,40 @@
+{% extends "school/base.html" %}
+{% block title %}Parent alerts · Attendly{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h2>Parent alerts</h2>
+    <p>Send a school-wide push. Parents see it on the Alerts tab and as a notification.</p>
+  </div>
+</div>
+
+<div class="split">
+  <div class="card">
+    <h3>Compose</h3>
+    <p class="hint">Tap a ready message, or write your own.</p>
+    <div class="templates">
+      {% for t in templates %}
+      <button type="button" class="chip" data-template="{{ t.key }}" data-title="{{ t.title }}" data-body="{{ t.body }}">{{ t.title }}</button>
+      {% endfor %}
+    </div>
+    <form method="post" action="{{ url_for('school.send_alert') }}">
+      <input type="hidden" name="template_key" value="" />
+      <div class="field"><label>Title</label><input name="title" required /></div>
+      <div class="field"><label>Message</label><textarea name="body" rows="5" required></textarea></div>
+      <button class="btn accent" type="submit">Send to all parents</button>
+    </form>
+  </div>
+  <div class="card">
+    <h3>Sent recently</h3>
+    {% for a in alerts %}
+      <article style="padding:12px 0;border-bottom:1px solid var(--line)">
+        <strong>{{ a.title }}</strong>
+        <div class="hint">{{ a.created_at }}</div>
+        <p>{{ a.body }}</p>
+      </article>
+    {% else %}
+      <p class="hint">No alerts sent yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "school/base.html" %}
+{% block title %}Dashboard · Attendly{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h2>Today at the gate</h2>
+    <p>{{ stats.date }} · {{ school.name }}</p>
+  </div>
+  <a class="btn accent" href="{{ url_for('school.gate') }}">Open gate reader</a>
+</div>
+
+<div class="grid-4">
+  <article class="card stat"><div class="label">Students</div><div class="value">{{ stats.total }}</div></article>
+  <article class="card stat present"><div class="label">Present</div><div class="value">{{ stats.present }}</div></article>
+  <article class="card stat absent"><div class="label">Absent</div><div class="value">{{ stats.absent }}</div></article>
+  <article class="card stat">
+    <div class="label">Membership</div>
+    <div class="value">{{ school.days_left }}</div>
+    <p class="hint">days remaining</p>
+  </article>
+</div>
+
+<div class="card status-row" style="margin-top:14px">
+  {% if fcm_ready %}
+    <span class="pill ok">Push on</span>
+    {% if fcm_devices %}
+      <span class="hint" style="margin:0">{{ fcm_devices }} parent phone{{ '' if fcm_devices == 1 else 's' }} ready</span>
+    {% else %}
+      <span class="hint" style="margin:0">Open the parent app once so this school can send arrivals.</span>
+    {% endif %}
+  {% else %}
+    <span class="pill warn">Push off</span>
+    <span class="hint" style="margin:0">Add firebase-adminsdk.json in the data folder.</span>
+  {% endif %}
+</div>
+
+<div class="card" style="margin-top:18px">
+  <h3 style="margin-bottom:12px">Latest taps</h3>
+  {% if taps %}
+  <table class="data">
+    <thead><tr><th>Student</th><th>Class</th><th>In</th><th>Out</th></tr></thead>
+    <tbody>
+      {% for t in taps %}
+      <tr class="present">
+        <td><strong>{{ t.name }}</strong></td>
+        <td>{{ t.class_name }}</td>
+        <td>{{ t.time_in_display or "—" }}</td>
+        <td>{{ t.time_out_display or "—" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="hint">No taps yet today. Use the gate reader or mark attendance manually.</p>
+  {% endif %}
+</div>
+{% endblock %}

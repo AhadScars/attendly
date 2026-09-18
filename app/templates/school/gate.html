@@ -1,0 +1,52 @@
+{% extends "school/base.html" %}
+{% block title %}Gate reader · Attendly{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h2>Gate reader</h2>
+    <p>Hardware is not connected yet — type the NFC tag, student ID, or name to simulate a tap.</p>
+  </div>
+</div>
+
+<div class="gate-hero">
+  <div class="card">
+    <div id="tap-status" class="tap-box">
+      <div class="tap-ring">NFC</div>
+      <h3 data-title>Waiting for a tap</h3>
+      <p class="hint" data-body>The parent app receives a push the moment this is recorded.</p>
+    </div>
+    <form id="gate-form" method="post" action="{{ url_for('school.gate_tap') }}" style="margin-top:16px">
+      <div class="field">
+        <label for="query">NFC tag / student ID / name</label>
+        <input id="query" name="query" placeholder="e.g. AT7K2M9Q4X or Aarav" autocomplete="off" required />
+      </div>
+      <div class="field">
+        <label for="action">Direction</label>
+        <select id="direction" name="direction">
+          <option value="auto">Auto — in, then out</option>
+          <option value="in">Force arrival</option>
+          <option value="out">Force left school</option>
+        </select>
+      </div>
+      <button class="btn accent wide" type="submit">Record tap</button>
+    </form>
+    <p class="hint">Try Aarav’s tag <strong>AT7K2M9Q4X</strong>. First tap = arrived, second tap = left school.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-bottom:12px">Today’s reader log</h3>
+    <table class="data">
+      <thead><tr><th>Student</th><th>Event</th><th>Time</th></tr></thead>
+      <tbody id="tap-list">
+        {% for t in taps %}
+        <tr>
+          <td><strong>{{ t.name }}</strong><div class="hint">{{ t.class_name }} · {{ t.student_id }}</div></td>
+          <td><span class="pill present">{{ "Left" if t.time_out else "Arrived" }}</span></td>
+          <td>{{ t.time_out_display or t.time_in_display }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

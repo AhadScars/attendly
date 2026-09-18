@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ink">#122426</color>
+    <color name="muted">#6A7B7C</color>
+    <color name="bg">#F2F6F5</color>
+    <color name="card">#FFFFFF</color>
+    <color name="line">#E4EEEC</color>
+    <color name="sidebar">#0F3D3E</color>
+    <color name="header_deep">#0B3031</color>
+    <color name="accent">#1FA8A0</color>
+    <color name="accent_soft">#E5F6F4</color>
+    <color name="present">#15803D</color>
+    <color name="present_bg">#E8F8EE</color>
+    <color name="absent">#B42318</color>
+    <color name="absent_bg">#FDECEC</color>
+    <color name="white">#FFFFFF</color>
+    <color name="header_muted">#A9D4D1</color>
+</resources>

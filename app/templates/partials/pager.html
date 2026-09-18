@@ -1,0 +1,21 @@
+{% if pager.total %}
+{% set ep = pager_endpoint if pager_endpoint is defined else request.endpoint %}
+<div class="pager">
+  <div>Showing {{ pager.start_index }}–{{ pager.end_index }} of {{ pager.total }}</div>
+  <div class="pages">
+    {% if pager.has_prev %}
+      <a href="{{ url_for(ep, page=pager.prev_page, **qargs) }}">‹</a>
+    {% endif %}
+    {% for p in pager.page_numbers %}
+      {% if p is none %}
+        <span>…</span>
+      {% else %}
+        <a class="{{ 'active' if p == pager.page else '' }}" href="{{ url_for(ep, page=p, **qargs) }}">{{ p }}</a>
+      {% endif %}
+    {% endfor %}
+    {% if pager.has_next %}
+      <a href="{{ url_for(ep, page=pager.next_page, **qargs) }}">›</a>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

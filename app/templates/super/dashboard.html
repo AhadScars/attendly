@@ -1,0 +1,49 @@
+{% extends "super/base.html" %}
+{% block title %}Owner dashboard · Attendly{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h2>All schools</h2>
+    <p>Membership remaining, licenses, and seats across the product.</p>
+  </div>
+  <a class="btn accent" href="{{ url_for('super.membership') }}">Generate a code</a>
+</div>
+
+<div class="grid-4">
+  <article class="card stat"><div class="label">Schools</div><div class="value">{{ stats.total_schools }}</div></article>
+  <article class="card stat present"><div class="label">Licensed</div><div class="value">{{ stats.licensed_schools }}</div></article>
+  <article class="card stat"><div class="label">Expiring ≤ 14 days</div><div class="value">{{ stats.expiring_soon }}</div></article>
+  <article class="card stat"><div class="label">Unused codes</div><div class="value">{{ stats.unused_keys }}</div></article>
+</div>
+
+<div class="card" style="margin-top:18px">
+  <table class="data">
+    <thead>
+      <tr><th>School</th><th>Login</th><th>Students</th><th>Membership</th><th>Status</th><th>Extend</th></tr>
+    </thead>
+    <tbody>
+      {% for s in schools %}
+      <tr>
+        <td><strong>{{ s.name }}</strong></td>
+        <td class="mono">{{ s.username }}</td>
+        <td>{{ s.student_count }} / {{ s.max_students }}</td>
+        <td>
+          {% if s.licensed %}
+            <span class="pill ok">{{ s.days_left }} days left</span>
+          {% else %}
+            <span class="pill warn">Expired</span>
+          {% endif %}
+        </td>
+        <td>{{ "Active" if s.is_active else "Disabled" }}</td>
+        <td>
+          <form method="post" action="{{ url_for('super.extend', school_id=s.id) }}" class="actions">
+            <input name="days" type="number" min="1" value="30" style="width:72px;padding:7px 8px;border:1px solid var(--line);border-radius:10px" />
+            <button class="btn sm" type="submit">Extend</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "school/base.html" %}
+{% block title %}Students · Attendly{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h2>Students</h2>
+    <p>Sorted by class. Search by name, ID, phone or NFC tag.</p>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:16px">
+  <h3>{{ "Edit student" if edit else "Add student" }}</h3>
+  <form method="post" action="{{ url_for('school.update', pk=edit.id) if edit else url_for('school.add') }}" class="row-form four" style="margin-top:12px">
+    <div class="field"><label>Student ID</label><input name="student_id" value="{{ edit.student_id if edit else '' }}" required /></div>
+    <div class="field"><label>Full name</label><input name="name" value="{{ edit.name if edit else '' }}" required /></div>
+    <div class="field"><label>Class</label><input name="class_name" value="{{ edit.class_name if edit else '' }}" placeholder="3-A" required /></div>
+    <div class="field"><label>Parent phone</label><input name="parent_phone" value="{{ edit.parent_phone if edit else '' }}" required /></div>
+    <div class="field"><label>Date of birth</label><input name="dob" value="{{ edit.dob_display if edit else '' }}" placeholder="DD/MM/YYYY" required /></div>
+    <div class="field"><label>NFC tag</label><input name="nfc_uid" value="{{ edit.nfc_uid if edit else '' }}" placeholder="Leave blank to auto-create" /></div>
+    <div class="field" style="align-self:end">
+      <button class="btn" type="submit">{{ "Save changes" if edit else "Add student" }}</button>
+      {% if edit %}<a class="btn ghost" href="{{ url_for('school.students') }}">Cancel</a>{% endif %}
+    </div>
+  </form>
+</div>
+
+<form class="toolbar" method="get">
+  <div class="field grow">
+    <label>Search</label>
+    <input name="q" value="{{ q }}" placeholder="Name, ID, phone, NFC…" />
+  </div>
+  <div class="field">
+    <label>Class</label>
+    <select name="class">
+      <option value="">All classes</option>
+      {% for c in classes %}
+        <option value="{{ c }}" {{ "selected" if c == class_name }}>{{ c }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button class="btn ghost" type="submit">Filter</button>
+</form>
+
+<div class="card">
+  <table class="data">
+    <thead>
+      <tr>
+        <th>ID</th><th>Name</th><th>Class</th><th>Parent phone</th><th>DOB</th><th>NFC tag</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in pager.rows %}
+      <tr>
+        <td class="mono">{{ s.student_id }}</td>
+        <td><strong>{{ s.name }}</strong></td>
+        <td>{{ s.class_name }}</td>
+        <td>{{ s.parent_phone }}</td>
+        <td>{{ s.dob_display }}</td>
+        <td class="mono">{{ s.nfc_uid }}</td>
+        <td class="actions">
+          <a class="btn ghost sm" href="{{ url_for('school.edit_student', pk=s.id) }}">Edit</a>
+          <form method="post" action="{{ url_for('school.remove_student', pk=s.id) }}" data-confirm="Remove {{ s.name }}?">
+            <button class="btn danger sm" type="submit">Remove</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% set pager_endpoint = "school.students" %}
+  {% set qargs = query_args(q=q, **{"class": class_name}) %}
+  {% include "partials/pager.html" %}
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+data/
+dist/
+.env
+build/
+*.spec
+android/.gradle/
+android/app/build/
+android/local.properties
+Attendly-Parent.apk
+firebase-adminsdk.json
+data/firebase-adminsdk.json
+android/app/google-services.json

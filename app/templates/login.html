@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Attendly — Sign in</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/logo.svg') }}" type="image/svg+xml" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}?v=4" />
+</head>
+<body class="auth-body">
+  <div class="auth-card">
+    <aside class="auth-aside">
+      <div>
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="" />
+        <h1>Attendly</h1>
+        <p>Gate tap, parent push, and a clear register — on this computer.</p>
+      </div>
+      <div class="aside-foot">School console · Owner console</div>
+    </aside>
+    <div class="auth-main">
+      <div class="role-switch">
+        <button type="button" class="{{ 'active' if role != 'owner' else '' }}" data-role="school">School</button>
+        <button type="button" class="{{ 'active' if role == 'owner' else '' }}" data-role="owner">Owner</button>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for cat, msg in messages %}
+          <div class="flash {{ cat }}">{{ msg }}</div>
+        {% endfor %}
+      {% endwith %}
+
+      <form method="post" action="{{ url_for('auth.login') }}">
+        <input type="hidden" name="role" id="role" value="{{ role or 'school' }}" />
+        <div class="field">
+          <label for="username">Username</label>
+          <input id="username" name="username" autocomplete="username" required />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required />
+        </div>
+        <button class="btn wide" type="submit">Sign in</button>
+      </form>
+      <p class="hint">
+        Demo school: <strong>greenspring</strong> / <strong>School@123</strong><br />
+        Owner: <strong>owner</strong> / <strong>Attendly@2026</strong>
+      </p>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll(".role-switch button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".role-switch button").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("role").value = btn.dataset.role;
+      });
+    });
+  </script>
+</body>
+</html>

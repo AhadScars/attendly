@@ -1,0 +1,56 @@
+{% extends "super/base.html" %}
+{% block title %}Schools · Attendly{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h2>Schools</h2>
+    <p>Create a school, extend its plan from here, or disable access.</p>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:16px">
+  <h3>Add a school</h3>
+  <form method="post" action="{{ url_for('super.create_school_route') }}" class="row-form" style="margin-top:12px">
+    <div class="field"><label>School name</label><input name="name" required /></div>
+    <div class="field"><label>Username</label><input name="username" required /></div>
+    <div class="field"><label>Password</label><input name="password" type="password" required /></div>
+    <div class="field"><label>Opening days</label><input name="days" type="number" min="1" value="30" /></div>
+    <div class="field"><label>Seat limit</label><input name="max_students" type="number" min="1" value="200" /></div>
+    <div class="field" style="align-self:end"><button class="btn" type="submit">Create school</button></div>
+  </form>
+</div>
+
+<div class="card">
+  <table class="data">
+    <thead>
+      <tr><th>School</th><th>Username</th><th>Students</th><th>Days left</th><th>Status</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for s in schools %}
+      <tr>
+        <td><strong>{{ s.name }}</strong></td>
+        <td class="mono">{{ s.username }}</td>
+        <td>{{ s.student_count }} / {{ s.max_students }}</td>
+        <td>
+          {% if s.licensed %}<span class="pill ok">{{ s.days_left }}</span>
+          {% else %}<span class="pill warn">0</span>{% endif %}
+        </td>
+        <td>{{ "Active" if s.is_active else "Disabled" }}</td>
+        <td class="actions">
+          <form method="post" action="{{ url_for('super.extend', school_id=s.id) }}">
+            <input name="days" type="number" min="1" value="30" style="width:70px;padding:7px;border:1px solid var(--line);border-radius:10px" />
+            <button class="btn sm" type="submit">Extend</button>
+          </form>
+          <form method="post" action="{{ url_for('super.toggle', school_id=s.id) }}">
+            <button class="btn ghost sm" type="submit">{{ "Disable" if s.is_active else "Enable" }}</button>
+          </form>
+          <form method="post" action="{{ url_for('super.remove', school_id=s.id) }}" data-confirm="Delete {{ s.name }} and all of its data?">
+            <button class="btn danger sm" type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

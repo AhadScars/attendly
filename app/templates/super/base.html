@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Attendly Owner{% endblock %}</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/logo.svg') }}" type="image/svg+xml" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}?v=4" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="" />
+        <div>
+          <strong>Attendly</strong>
+          <span>Owner console</span>
+        </div>
+      </div>
+      <nav>
+        <a class="nav-link {{ 'active' if request.endpoint == 'super.dashboard' }}" href="{{ url_for('super.dashboard') }}">Dashboard</a>
+        <a class="nav-link {{ 'active' if request.endpoint == 'super.schools' }}" href="{{ url_for('super.schools') }}">Schools</a>
+        <a class="nav-link {{ 'active' if request.endpoint == 'super.membership' }}" href="{{ url_for('super.membership') }}">Membership codes</a>
+      </nav>
+      <div class="foot">
+        <div class="who">{{ session.get('name') }}</div>
+        <form method="post" action="{{ url_for('auth.logout') }}">
+          <button class="btn ghost sm" type="submit">Sign out</button>
+        </form>
+      </div>
+    </aside>
+    <main class="main">
+      {% include "partials/flash.html" %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}?v=4"></script>
+</body>
+</html>

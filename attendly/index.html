@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Attendly: NFC tags on student bags, a tap at the school gate, and an instant FCM push to parents. School attendance, explained simply." />
+  <meta name="theme-color" content="#f5f5f7" />
+  <title>Attendly — School attendance, explained simply</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" id="header">
+    <div class="nav-inner">
+      <a class="logo" href="index.html">Attendly</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="index.html" class="active" aria-current="page">Attendance</a>
+        <a href="ride.html">Ride</a>
+        <a href="#how">How it works</a>
+        <a href="#devices">Hardware</a>
+        <a href="#apps">Apps</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="cta-pill" href="#demo">Book a demo</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="stage" id="top">
+      <div class="wrap">
+        <p class="eyebrow">Attendly · Smart Attendance</p>
+        <h1>School attendance.<br />Explained simply.</h1>
+        <p class="sub">A small NFC tag on the student’s bag. A tap at the school device marks them present. Parents get a push notification the moment it happens.</p>
+        <div class="links">
+          <a href="#how">How it works ›</a>
+          <a href="#devices">Hardware we install ›</a>
+          <a href="#apps">Apps ›</a>
+        </div>
+        <figure class="hero-media">
+          <img src="assets/images/hero.jpg" alt="Quiet school gate in morning light with a wall-mounted tap reader and a navy backpack on a bench." width="1190" height="692" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="stage dark" id="how">
+      <div class="wrap">
+        <p class="chip">How it works</p>
+        <h2>From bag to parent phone,<br />everyone sees the same arrival.</h2>
+        <p class="sub">The tag stays on the bag. The reader stays at the gate. The parent app updates itself — no roll call, no missed ID card.</p>
+      </div>
+      <div class="steps">
+        <article class="card media-card">
+          <img src="assets/images/tag.jpg" alt="Cream NFC tag clipped to a navy backpack strap." width="1062" height="836" />
+          <div class="body">
+            <div>
+              <h3>1. Tag</h3>
+              <p>A durable NFC tag is clipped to the student’s bag. One tag, one student — nothing extra to carry.</p>
+            </div>
+          </div>
+        </article>
+        <article class="card media-card">
+          <img src="assets/images/tap.jpg" alt="A hand tapping an NFC bag tag against a wall-mounted school reader." width="1062" height="836" />
+          <div class="body">
+            <div>
+              <h3>2. Tap</h3>
+              <p>At the school gate, the student taps the tag on the reader. Attendance is marked present in under a second.</p>
+            </div>
+          </div>
+        </article>
+        <article class="card media-card">
+          <img src="assets/images/parent.jpg" alt="A parent holding a phone at a sunlit kitchen table." width="1062" height="836" />
+          <div class="body">
+            <div>
+              <h3>3. Notify</h3>
+              <p>FCM delivers a push to the parent’s phone. The school dashboard updates at the same time.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="duo">
+        <figure class="hero-media">
+          <img src="assets/images/reader.jpg" alt="Wall-mounted NFC attendance reader with a soft light ring." width="1062" height="836" />
+        </figure>
+        <figure class="hero-media">
+          <img src="assets/images/dashboard.jpg" alt="School office desk with a laptop." width="1190" height="692" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="stage" id="devices">
+      <div class="wrap">
+        <p class="eyebrow">Devices we deliver</p>
+        <h2>Hardware that makes<br />the tap count.</h2>
+        <p class="sub">Two pieces of hardware. Installed once. Used every morning — a tag on the bag, a reader at the gate.</p>
+      </div>
+      <div class="grid-2">
+        <article class="card media-card">
+          <img src="assets/images/tag.jpg" alt="Close-up of the Attendly NFC bag tag." width="1062" height="836" />
+          <div class="body">
+            <div>
+              <h3>NFC bag tag</h3>
+              <p>Passive NFC. No battery. Water-resistant shell, clipped to a strap or zipper. Assigned to one student in the school console.</p>
+              <ul class="mini">
+                <li>Works without a student phone</li>
+                <li>Stays on the bag all year</li>
+                <li>Reassignable if a bag is replaced</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="card media-card">
+          <img src="assets/images/reader.jpg" alt="Gate tap device mounted on stone." width="1062" height="836" />
+          <div class="body">
+            <div>
+              <h3>Gate tap device</h3>
+              <p>A wall-mounted reader at the entrance. LED confirms the tap. Attendance is written to the school record immediately.</p>
+              <ul class="mini">
+                <li>Indoor or covered outdoor mount</li>
+                <li>Queues locally if the network dips</li>
+                <li>One device per gate or classroom</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="stage dark" id="apps">
+      <div class="wrap">
+        <p class="chip">Software</p>
+        <h2>Two views.<br />One arrival.</h2>
+        <p class="sub">Parents get a quiet push. The school gets a live register. Both read the same tap.</p>
+      </div>
+      <div class="grid-2 apps">
+        <article class="card app-card">
+          <div>
+            <h3>Parent app</h3>
+            <p class="dots">FCM push on arrival · optional tap-out at dismissal · today’s status · multi-child on one phone · leave request from the app</p>
+          </div>
+          <div class="phone" aria-hidden="true">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <p class="phone-time">8:12</p>
+              <p class="phone-date">Tuesday morning</p>
+              <div class="push">
+                <div class="push-top"><span class="push-mark"></span><span>Attendly</span><span class="push-ago">now</span></div>
+                <strong>Aarav arrived at school</strong>
+                <p>Tapped at the main gate · 8:12 AM</p>
+              </div>
+              <div class="push soft">
+                <div class="push-top"><span class="push-mark"></span><span>Attendly</span><span class="push-ago">yesterday</span></div>
+                <strong>Aarav left school</strong>
+                <p>Tapped at the main gate · 2:08 PM</p>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="card app-card">
+          <div>
+            <h3>School console</h3>
+            <p class="dots">Live present / absent board · class filters · daily and monthly reports · export for the office · staff login in the browser</p>
+          </div>
+          <div class="console" aria-hidden="true">
+            <div class="console-bar"><span></span><span></span><span></span><em>Attendly · Today</em></div>
+            <div class="console-stats">
+              <div><b>312</b><span>Present</span></div>
+              <div><b>18</b><span>Not yet</span></div>
+              <div><b>4</b><span>On leave</span></div>
+            </div>
+            <ul class="console-rows">
+              <li><span>Aarav Sharma</span><span>7-A</span><span class="ok">8:12 · Main</span></li>
+              <li><span>Meera Iyer</span><span>5-B</span><span class="ok">8:09 · Main</span></li>
+              <li><span>Kabir Khan</span><span>9-C</span><span class="ok">8:07 · East</span></li>
+              <li><span>Zara Ali</span><span>3-A</span><span class="wait">—</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="stage ref-gallery" id="gallery">
+      <div class="wrap">
+        <p class="chip">Reference</p>
+        <h2>See the system.</h2>
+        <p class="sub">Tag, reader, tap, and the school desk — the whole morning in four frames.</p>
+      </div>
+      <div class="ref-strip">
+        <figure class="ref-item">
+          <div class="ref-frame"><img src="assets/images/hero.jpg" alt="School entrance with tap reader." width="1190" height="692" /></div>
+          <figcaption>Gate in the morning</figcaption>
+        </figure>
+        <figure class="ref-item">
+          <div class="ref-frame"><img src="assets/images/tag.jpg" alt="NFC tag on a backpack." width="1062" height="836" /></div>
+          <figcaption>NFC bag tag</figcaption>
+        </figure>
+        <figure class="ref-item">
+          <div class="ref-frame"><img src="assets/images/tap.jpg" alt="Tapping the bag tag on the reader." width="1062" height="836" /></div>
+          <figcaption>The tap</figcaption>
+        </figure>
+        <figure class="ref-item">
+          <div class="ref-frame"><img src="assets/images/dashboard.jpg" alt="Laptop on a quiet school office desk." width="1190" height="692" /></div>
+          <figcaption>School console</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="stage" id="why">
+      <div class="wrap">
+        <p class="eyebrow">Why it fits</p>
+        <h2>Attendance without<br />the clipboard.</h2>
+        <p class="sub">Built for the school office, the parent at breakfast, and the student who already has a bag.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <div>
+            <h3>For the school</h3>
+            <p>The register writes itself. Late arrivals are visible. Reports are ready before first period.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div>
+            <h3>For parents</h3>
+            <p>A push notification replaces the 8:20 phone call. They know the bag reached the gate.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div>
+            <h3>For students</h3>
+            <p>Nothing to remember except the bag they already carry. One tap and they are in.</p>
+          </div>
+        </article>
+      </div>
+      <div class="proof">
+        <div><b>&lt; 1s</b><span>Tap to recorded attendance</span></div>
+        <div><b>FCM</b><span>Push on the parent’s phone</span></div>
+        <div><b>0 battery</b><span>Passive NFC tag on the bag</span></div>
+        <div><b>2 devices</b><span>A tag and a gate reader</span></div>
+      </div>
+    </section>
+
+    <section class="stage dark" id="faq">
+      <div class="wrap faq-head">
+        <p class="chip">FAQ</p>
+        <h2>Common Attendly questions.</h2>
+        <p class="sub">Direct answers for principals and parents.</p>
+      </div>
+      <div class="faq-list">
+        <details open>
+          <summary>What is Attendly?</summary>
+          <p>Attendly is an NFC school attendance system. Each student has a tag on their bag. Tapping it on a school device marks them present and sends an FCM push notification to the parent’s phone.</p>
+        </details>
+        <details>
+          <summary>How does the NFC bag tag work?</summary>
+          <p>The tag is a passive NFC chip in a small clip. It has no battery and no screen. When it touches the gate reader, the reader identifies the student and writes the attendance record.</p>
+        </details>
+        <details>
+          <summary>What do parents receive?</summary>
+          <p>A Firebase Cloud Messaging push on the Attendly parent app — typically “arrived” in the morning and, if the school enables it, “left” at dismissal. The same status is visible in the app later in the day.</p>
+        </details>
+        <details>
+          <summary>Does the student need a phone?</summary>
+          <p>No. The tag lives on the bag. Only the school device and the parent’s phone need a network connection.</p>
+        </details>
+        <details>
+          <summary>What if the internet drops at the gate?</summary>
+          <p>The reader queues the tap locally and syncs when the connection returns. The parent push is sent as soon as the record is online.</p>
+        </details>
+        <details>
+          <summary>Can one parent follow more than one child?</summary>
+          <p>Yes. Multiple students can sit on a single parent login. Each tap is labelled with the child’s name and the gate they used.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="stage" id="together">
+      <div class="wrap">
+        <p class="eyebrow">Also explore</p>
+        <h2>Same bag tag.<br />The ride as well.</h2>
+        <p class="sub">Attendly Ride uses the same NFC tag on the bus — live GPS, boarding tap, and a push when the stop is two minutes away.</p>
+      </div>
+      <div class="related">
+        <a class="card related-card current">
+          <img src="assets/images/hero.jpg" alt="" width="1190" height="692" />
+          <div>
+            <h3>Smart Attendance</h3>
+            <p>Tap at the school gate. Attendance is marked. Parent gets an FCM push.</p>
+            <span class="more">You are here</span>
+          </div>
+        </a>
+        <a class="card related-card" href="ride.html">
+          <img src="assets/images/bus-hero.jpg" alt="" width="1190" height="692" />
+          <div>
+            <h3>Smart Ride</h3>
+            <p>Tap on the bus. Live map. Push at board, approach, and drop.</p>
+            <span class="more">Learn more ›</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="stage cta" id="demo">
+      <div class="wrap">
+        <p class="eyebrow">Book a demo</p>
+        <h2>Ready for a quieter<br />morning register?</h2>
+        <p class="sub">Tell us your city and student count. We’ll show the tag, the tap, and the parent push in one short walkthrough.</p>
+      </div>
+      <form class="demo-form" id="demoForm" novalidate>
+        <input type="hidden" name="product" value="attendance" />
+        <label>School name
+          <input type="text" name="school" required autocomplete="organization" />
+        </label>
+        <div class="form-row">
+          <label>City
+            <input type="text" name="city" required autocomplete="address-level2" />
+          </label>
+          <label>Students
+            <input type="number" name="students" min="1" required placeholder="e.g. 420" />
+          </label>
+        </div>
+        <label>Work email
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
+        <button type="submit" class="cta-pill submit">Request a demo</button>
+        <p class="form-note">We’ll reply by email. No account is created until you ask for one.</p>
+        <p class="form-ok" id="formOk" hidden>Thank you. We’ll write back with a demo slot.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div>
+        <strong>Attendly</strong>
+        <p>NFC bag tags. A tap at the gate. A push on the parent’s phone.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="index.html">Attendance</a>
+        <a href="ride.html">Ride</a>
+        <a href="#how">How it works</a>
+        <a href="#devices">Hardware</a>
+        <a href="#faq">FAQ</a>
+        <a href="#demo">Book a demo</a>
+      </nav>
+    </div>
+    <p class="copy">© <span id="year"></span> Attendly. Built for schools.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

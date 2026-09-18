@@ -1,0 +1,31 @@
+{% extends "school/base.html" %}
+{% block title %}Membership · Attendly{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h2>Membership</h2>
+    <p>Paste a code from the Attendly owner to extend this school’s plan.</p>
+  </div>
+</div>
+
+<div class="grid-2">
+  <article class="card stat">
+    <div class="label">Days remaining</div>
+    <div class="value">{{ school.days_left }}</div>
+    <p class="hint">
+      {% if school.licensed %}Active until {{ school.license_expires_at }}{% else %}Plan expired{% endif %}
+    </p>
+    <p class="hint">Seat limit: {{ school.max_students }} students</p>
+  </article>
+  <article class="card">
+    <h3>Redeem a code</h3>
+    <form method="post" action="{{ url_for('school.redeem') }}" style="margin-top:12px">
+      <div class="field">
+        <label>Membership code</label>
+        <input name="code" class="mono" placeholder="XXXX-XXXX-XXXX-XXXX" required />
+      </div>
+      <button class="btn accent" type="submit">Apply code</button>
+    </form>
+  </article>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "super/base.html" %}
+{% block title %}Membership codes · Attendly{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h2>Membership codes</h2>
+    <p>Generate a random letter-and-number code. The school pastes it under Membership.</p>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:16px">
+  <form method="post" action="{{ url_for('super.generate') }}" class="row-form">
+    <div class="field"><label>Days</label><input name="days" type="number" min="1" value="30" /></div>
+    <div class="field"><label>Max students</label><input name="max_students" type="number" min="1" value="200" /></div>
+    <div class="field"><label>Notes</label><input name="notes" placeholder="Optional" /></div>
+    <div class="field" style="align-self:end"><button class="btn accent" type="submit">Generate code</button></div>
+  </form>
+</div>
+
+<div class="card">
+  <table class="data">
+    <thead>
+      <tr><th>Code</th><th>Days</th><th>Seats</th><th>School</th><th>Used</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for k in keys %}
+      <tr>
+        <td class="mono"><strong>{{ k.key_code }}</strong></td>
+        <td>{{ k.days_valid }}</td>
+        <td>{{ k.max_students }}</td>
+        <td>{{ k.school_name or "—" }}</td>
+        <td>
+          {% if k.is_revoked %}<span class="pill warn">Revoked</span>
+          {% elif k.used_at %}<span class="pill ok">{{ k.used_at }}</span>
+          {% else %}<span class="pill">Unused</span>{% endif %}
+        </td>
+        <td class="actions">
+          <button class="btn ghost sm" type="button" data-copy="{{ k.key_code }}">Copy</button>
+          {% if not k.is_revoked %}
+          <form method="post" action="{{ url_for('super.revoke', key_id=k.id) }}" data-confirm="Revoke this code?">
+            <button class="btn danger sm" type="submit">Revoke</button>
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "school/base.html" %}
+{% block title %}Attendance · Attendly{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h2>Attendance</h2>
+    <p>Green is present. Red is absent. Operators can mark a forgotten tap here.</p>
+  </div>
+  <a class="btn" href="{{ url_for('school.export', date=date) }}">Download sheet</a>
+</div>
+
+<div class="grid-3" style="margin-bottom:16px">
+  <article class="card stat"><div class="label">On roll</div><div class="value">{{ stats.total }}</div></article>
+  <article class="card stat present"><div class="label">Present</div><div class="value">{{ stats.present }}</div></article>
+  <article class="card stat absent"><div class="label">Absent</div><div class="value">{{ stats.absent }}</div></article>
+</div>
+
+<form class="toolbar" method="get">
+  <div class="field"><label>Date</label><input type="date" name="date" value="{{ date }}" /></div>
+  <div class="field grow"><label>Search name</label><input name="q" value="{{ q }}" placeholder="Student name or ID" /></div>
+  <div class="field">
+    <label>Class</label>
+    <select name="class">
+      <option value="">All</option>
+      {% for c in classes %}<option value="{{ c }}" {{ "selected" if c == class_name }}>{{ c }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="field">
+    <label>Status</label>
+    <select name="status">
+      <option value="">All</option>
+      <option value="present" {{ "selected" if status == "present" }}>Present</option>
+      <option value="absent" {{ "selected" if status == "absent" }}>Absent</option>
+    </select>
+  </div>
+  <button class="btn ghost" type="submit">Apply</button>
+</form>
+
+<div class="card">
+  <table class="data">
+    <thead>
+      <tr><th>ID</th><th>Name</th><th>Class</th><th>Status</th><th>In</th><th>Out</th><th>Mark</th></tr>
+    </thead>
+    <tbody>
+      {% for r in pager.rows %}
+      <tr class="{{ 'present' if r.is_present else 'absent' }}">
+        <td class="mono">{{ r.student_id }}</td>
+        <td><strong>{{ r.name }}</strong></td>
+        <td>{{ r.class_name }}</td>
+        <td><span class="pill {{ 'present' if r.is_present else 'absent' }}">{{ r.status }}</span></td>
+        <td>{{ r.time_in_display or "—" }}</td>
+        <td>{{ r.time_out_display or "—" }}</td>
+        <td class="actions">
+          <form method="post" action="{{ url_for('school.mark') }}">
+            <input type="hidden" name="student_pk" value="{{ r.id }}" />
+            <input type="hidden" name="date" value="{{ date }}" />
+            <input type="hidden" name="action" value="in" />
+            <button class="btn sm accent" type="submit">In</button>
+          </form>
+          <form method="post" action="{{ url_for('school.mark') }}">
+            <input type="hidden" name="student_pk" value="{{ r.id }}" />
+            <input type="hidden" name="date" value="{{ date }}" />
+            <input type="hidden" name="action" value="out" />
+            <button class="btn sm" type="submit">Out</button>
+          </form>
+          <form method="post" action="{{ url_for('school.mark') }}">
+            <input type="hidden" name="student_pk" value="{{ r.id }}" />
+            <input type="hidden" name="date" value="{{ date }}" />
+            <input type="hidden" name="action" value="absent" />
+            <button class="btn sm danger" type="submit">Absent</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% set pager_endpoint = "school.attendance" %}
+  {% set qargs = query_args(date=date, q=q, status=status, **{"class": class_name}) %}
+  {% include "partials/pager.html" %}
+</div>
+{% endblock %}

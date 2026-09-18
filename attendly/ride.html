@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Attendly Ride: NFC tap when a student boards the bus, live GPS on the parent app, and FCM push at pickup, approach, and drop." />
+  <meta name="theme-color" content="#f5f5f7" />
+  <title>Attendly Ride — School bus tracking, explained simply</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" id="header">
+    <div class="nav-inner">
+      <a class="logo" href="index.html">Attendly</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="index.html">Attendance</a>
+        <a href="ride.html" class="active" aria-current="page">Ride</a>
+        <a href="#how">How it works</a>
+        <a href="#devices">Hardware</a>
+        <a href="#apps">Apps</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="cta-pill" href="#demo">Book a demo</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="stage" id="top">
+      <div class="wrap">
+        <p class="eyebrow">Attendly · Smart Ride</p>
+        <h1>From stop to school.<br />On one map.</h1>
+        <p class="sub">The student taps the bag tag when they board. Parents see the bus live, get a push at pickup and drop, and know when their stop is two minutes away.</p>
+        <div class="links">
+          <a href="#how">How it works ›</a>
+          <a href="#map">Live tracking ›</a>
+          <a href="#apps">Apps ›</a>
+        </div>
+        <figure class="hero-media">
+          <img src="assets/images/bus-hero.jpg" alt="Navy and cream school bus parked on a quiet tree-lined street in morning light." width="1190" height="692" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="stage dark" id="how">
+      <div class="wrap">
+        <p class="chip">How it works</p>
+        <h2>Board. Track. Tell the parent.</h2>
+        <p class="sub">The same NFC tag used at the school gate works on the bus. GPS fills the minutes in between.</p>
+      </div>
+      <div class="steps">
+        <article class="card media-card">
+          <img src="assets/images/bus-reader.jpg" alt="NFC reader clipped to a bus handrail in an empty cabin." width="1062" height="836" />
+          <div class="body">
+            <div>
+              <h3>1. Board</h3>
+              <p>Student taps the bag tag on the bus reader. Boarding is logged against the route, the bus, and the time.</p>
+            </div>
+          </div>
+        </article>
+        <article class="card media-card">
+          <img src="assets/images/gps.jpg" alt="4G GPS tracker on a school-bus dashboard." width="1062" height="836" />
+          <div class="body">
+            <div>
+              <h3>2. Track</h3>
+              <p>A 4G GPS unit on the bus sends location every few seconds. Parents and the school share the same live map.</p>
+            </div>
+          </div>
+        </article>
+        <article class="card media-card">
+          <img src="assets/images/parent.jpg" alt="A parent holding a phone at a sunlit kitchen table." width="1062" height="836" />
+          <div class="body">
+            <div>
+              <h3>3. Notify</h3>
+              <p>FCM push when they board, when the bus is two minutes from the stop, and when they tap off at school.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="duo">
+        <figure class="hero-media">
+          <img src="assets/images/bus-road.jpg" alt="School bus on a tree-lined road at golden hour." width="1190" height="692" />
+        </figure>
+        <figure class="hero-media">
+          <img src="assets/images/dispatch.jpg" alt="Transport desk with a route list, keys, and a tablet." width="1062" height="836" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="stage" id="devices">
+      <div class="wrap">
+        <p class="eyebrow">Devices we deliver</p>
+        <h2>Hardware that makes<br />the ride visible.</h2>
+        <p class="sub">The bag tag is the same one used for gate attendance. The bus gets a reader and a GPS unit.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card media-card">
+          <img src="assets/images/tag.jpg" alt="NFC bag tag on a navy backpack." width="1062" height="836" />
+          <div class="body">
+            <div>
+              <h3>NFC bag tag</h3>
+              <p>One tag for the bus and the school gate. No battery. Assigned to one student.</p>
+              <ul class="mini">
+                <li>Board and alight taps</li>
+                <li>Same tag as Attendly Gate</li>
+                <li>Reassignable if a bag is replaced</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="card media-card">
+          <img src="assets/images/bus-reader.jpg" alt="On-bus NFC reader on the handrail." width="1062" height="836" />
+          <div class="body">
+            <div>
+              <h3>On-bus reader</h3>
+              <p>Handrail-mounted tap. LED confirms boarding. In/out is written to the trip roster.</p>
+              <ul class="mini">
+                <li>Works on 12V bus power</li>
+                <li>Queues taps if 4G dips</li>
+                <li>One reader per door</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="card media-card">
+          <img src="assets/images/gps.jpg" alt="4G GPS tracker on the dashboard." width="1062" height="836" />
+          <div class="body">
+            <div>
+              <h3>4G GPS tracker</h3>
+              <p>Live location for the parent map and the transport desk. Refresh about every 5 seconds.</p>
+              <ul class="mini">
+                <li>4G with fallback tracking</li>
+                <li>Ignition and speed events</li>
+                <li>Geofence at school and stops</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="stage dark" id="map">
+      <div class="wrap">
+        <p class="chip">Live tracking</p>
+        <h2>Parents watch the same<br />trip the school sees.</h2>
+        <p class="sub">A live map, an ETA, and a quiet push before the bus reaches the stop. No “where is the bus?” calls.</p>
+      </div>
+      <div class="map-stage" aria-hidden="true">
+        <div class="map-canvas" id="mapCanvas">
+          <svg class="map-route" viewBox="0 0 640 360" preserveAspectRatio="none">
+            <path id="routePath" d="M40 280 C 120 270, 140 200, 210 190 S 300 230, 360 160 S 460 70, 600 80" fill="none" stroke="#00c2a8" stroke-width="4" stroke-linecap="round" />
+          </svg>
+          <span class="stop" style="left:6%;top:76%">Home stop</span>
+          <span class="stop mid" style="left:54%;top:42%">Oak Lane</span>
+          <span class="stop end" style="left:90%;top:18%">School</span>
+          <span class="bus-pin" id="busPin">Bus 12</span>
+        </div>
+        <aside class="map-cards">
+          <div class="map-card">
+            <em>Aarav · Bus 12</em>
+            <strong>4 min to your stop</strong>
+            <p>On route · 28 km/h · 2 stops away</p>
+          </div>
+          <div class="map-card soft">
+            <em>Last tap</em>
+            <strong>Boarded at 7:41 AM</strong>
+            <p>Home stop · NFC bag tag</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="stage" id="apps">
+      <div class="wrap">
+        <p class="eyebrow">Software</p>
+        <h2>Three apps.<br />One commute.</h2>
+        <p class="sub">Parents, the driver, and the transport desk each get the view they need — from the same tap and the same GPS ping.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <div>
+            <h3>Parent app</h3>
+            <p class="dots">Live bus map · ETA · boarded / alighted FCM push · 2-minute-to-stop alert · multi-child · leave request · call the attendant</p>
+          </div>
+        </article>
+        <article class="card">
+          <div>
+            <h3>Driver app</h3>
+            <p class="dots">Today’s roster · navigation · in/out from the tap · missed-student flag · wrong-direction alert · SOS to the desk</p>
+          </div>
+        </article>
+        <article class="card">
+          <div>
+            <h3>Transport console</h3>
+            <p class="dots">All buses on one map · visit / missed stops · speed and off-route alerts · change bus or stop · daily trip report</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="grid-2 apps" style="margin-top:16px">
+        <article class="card app-card">
+          <div>
+            <h3>What the parent sees</h3>
+            <p class="dots">A push when they board. A map while they ride. Another push when the stop is close — and when they tap off at school.</p>
+          </div>
+          <div class="phone" aria-hidden="true">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <p class="phone-time">7:44</p>
+              <p class="phone-date">Tuesday · Route 12</p>
+              <div class="push">
+                <div class="push-top"><span class="push-mark"></span><span>Attendly Ride</span><span class="push-ago">now</span></div>
+                <strong>Bus 12 is 2 minutes away</strong>
+                <p>Aarav’s stop · Oak Lane</p>
+              </div>
+              <div class="push soft">
+                <div class="push-top"><span class="push-mark"></span><span>Attendly Ride</span><span class="push-ago">3m</span></div>
+                <strong>Aarav boarded Bus 12</strong>
+                <p>Home stop · 7:41 AM</p>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="card app-card">
+          <div>
+            <h3>What the desk sees</h3>
+            <p class="dots">Every bus, every tap, every missed stop. Speed and off-route events land here first.</p>
+          </div>
+          <div class="console" aria-hidden="true">
+            <div class="console-bar"><span></span><span></span><span></span><em>Ride · Live fleet</em></div>
+            <div class="console-stats">
+              <div><b>14</b><span>Buses out</span></div>
+              <div><b>2</b><span>Late</span></div>
+              <div><b>0</b><span>SOS</span></div>
+            </div>
+            <ul class="console-rows">
+              <li><span>Bus 12</span><span>R-A</span><span class="ok">On time</span></li>
+              <li><span>Bus 07</span><span>R-C</span><span class="ok">Oak Lane</span></li>
+              <li><span>Bus 03</span><span>R-B</span><span class="wait">6 min late</span></li>
+              <li><span>Bus 19</span><span>R-D</span><span class="ok">At school</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="stage dark" id="alerts">
+      <div class="wrap">
+        <p class="chip">Alerts</p>
+        <h2>The tap starts it.<br />The ride stays quiet.</h2>
+        <p class="sub">Parents get the three messages that matter. Staff get the ones that keep the route safe.</p>
+      </div>
+      <div class="grid-2 alert-grid">
+        <article class="card">
+          <div>
+            <h3>For parents</h3>
+            <ul class="mini">
+              <li>Boarded the bus</li>
+              <li>Two minutes from your stop</li>
+              <li>Tapped off at school</li>
+              <li>Bus running late</li>
+              <li>Last drop of the evening confirmed</li>
+            </ul>
+          </div>
+        </article>
+        <article class="card">
+          <div>
+            <h3>For the school</h3>
+            <ul class="mini">
+              <li>Student missing from the roster</li>
+              <li>Off-route or wrong direction</li>
+              <li>Over-speed on a stretch</li>
+              <li>Geofence in / out at campus</li>
+              <li>Driver SOS to the transport desk</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="stage ref-gallery" id="gallery">
+      <div class="wrap">
+        <p class="chip">Reference</p>
+        <h2>See the ride.</h2>
+        <p class="sub">Bus, reader, GPS, and the desk that watches the fleet.</p>
+      </div>
+      <div class="ref-strip">
+        <figure class="ref-item">
+          <div class="ref-frame"><img src="assets/images/bus-hero.jpg" alt="School bus on a quiet street." width="1190" height="692" /></div>
+          <figcaption>On the street</figcaption>
+        </figure>
+        <figure class="ref-item">
+          <div class="ref-frame"><img src="assets/images/bus-reader.jpg" alt="NFC reader on the bus handrail." width="1062" height="836" /></div>
+          <figcaption>On-bus tap</figcaption>
+        </figure>
+        <figure class="ref-item">
+          <div class="ref-frame"><img src="assets/images/gps.jpg" alt="GPS tracker on the dashboard." width="1062" height="836" /></div>
+          <figcaption>4G GPS</figcaption>
+        </figure>
+        <figure class="ref-item">
+          <div class="ref-frame"><img src="assets/images/bus-road.jpg" alt="Bus on the road at dusk." width="1190" height="692" /></div>
+          <figcaption>The commute</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="stage" id="together">
+      <div class="wrap">
+        <p class="eyebrow">One tag</p>
+        <h2>The bag tag works<br />on the bus and at the gate.</h2>
+        <p class="sub">Attendly Ride and Attendly Gate share the same NFC tag. Board the bus, tap at school — parents get both stories.</p>
+      </div>
+      <div class="related">
+        <a class="card related-card" href="index.html">
+          <img src="assets/images/hero.jpg" alt="" width="1190" height="692" />
+          <div>
+            <h3>Smart Attendance</h3>
+            <p>Tap at the school gate. Attendance is marked. Parent gets an FCM push.</p>
+            <span class="more">Learn more ›</span>
+          </div>
+        </a>
+        <a class="card related-card current">
+          <img src="assets/images/bus-hero.jpg" alt="" width="1190" height="692" />
+          <div>
+            <h3>Smart Ride</h3>
+            <p>Tap on the bus. Live map. Push at board, approach, and drop.</p>
+            <span class="more">You are here</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="stage dark" id="faq">
+      <div class="wrap">
+        <p class="chip">FAQ</p>
+        <h2>Common Ride questions.</h2>
+        <p class="sub">For principals, transport coordinators, and parents.</p>
+      </div>
+      <div class="faq-list">
+        <details open>
+          <summary>What is Attendly Ride?</summary>
+          <p>Attendly Ride is school-bus tracking built around the same NFC bag tag as Attendly Gate. Students tap when they board and alight. A 4G GPS unit keeps the bus on a live map. Parents get FCM pushes for boarding, approaching the stop, and arrival.</p>
+        </details>
+        <details>
+          <summary>How does the boarding tap work?</summary>
+          <p>The student holds the bag tag to the reader on the bus handrail. The tap is logged against that trip. If they forget to tap, the driver roster still shows who should be on board so the attendant can mark them.</p>
+        </details>
+        <details>
+          <summary>How live is the map?</summary>
+          <p>The GPS unit reports about every 5 seconds on 4G. If the signal dips, the tracker stores points and backfills the route when it reconnects. The parent app shows the last known point until then.</p>
+        </details>
+        <details>
+          <summary>When does the parent get a push?</summary>
+          <p>When the student boards, when the bus is about two minutes from their stop, when they tap off at school, and if the bus is running late. Evening last-drop can be confirmed the same way.</p>
+        </details>
+        <details>
+          <summary>Does this replace gate attendance?</summary>
+          <p>No. Ride covers the commute. Gate attendance is a separate page — same tag, school entrance reader. Schools often run both so parents see “boarded the bus” and later “arrived at school.”</p>
+        </details>
+        <details>
+          <summary>What if a student misses the bus?</summary>
+          <p>The transport console flags a roster name with no boarding tap after the stop window. The desk can call the parent from the console. The parent app can also show “not boarded.”</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="stage cta" id="demo">
+      <div class="wrap">
+        <p class="eyebrow">Book a demo</p>
+        <h2>Ready for a quieter<br />morning pickup?</h2>
+        <p class="sub">Tell us your city and bus count. We’ll show the tap, the live map, and the parent push in one short walkthrough.</p>
+      </div>
+      <form class="demo-form" id="demoForm" novalidate>
+        <input type="hidden" name="product" value="ride" />
+        <label>School name
+          <input type="text" name="school" required autocomplete="organization" />
+        </label>
+        <div class="form-row">
+          <label>City
+            <input type="text" name="city" required autocomplete="address-level2" />
+          </label>
+          <label>Buses
+            <input type="number" name="buses" min="1" required placeholder="e.g. 12" />
+          </label>
+        </div>
+        <label>Work email
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
+        <button type="submit" class="cta-pill submit">Request a Ride demo</button>
+        <p class="form-note">We’ll reply by email. No account is created until you ask for one.</p>
+        <p class="form-ok" id="formOk" hidden>Thank you. We’ll write back with a demo slot.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div>
+        <strong>Attendly</strong>
+        <p>NFC bag tags. A tap on the bus. A live map on the parent’s phone.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="index.html">Attendance</a>
+        <a href="ride.html">Ride</a>
+        <a href="#how">How it works</a>
+        <a href="#map">Live tracking</a>
+        <a href="#faq">FAQ</a>
+        <a href="#demo">Book a demo</a>
+      </nav>
+    </div>
+    <p class="copy">© <span id="year"></span> Attendly. Built for schools.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

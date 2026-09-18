@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Attendly{% endblock %}</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/logo.svg') }}" type="image/svg+xml" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}?v=4" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="" />
+        <div>
+          <strong>Attendly</strong>
+          <span>{{ school.name if school else 'School' }}</span>
+        </div>
+      </div>
+      <nav>
+        <a class="nav-link {{ 'active' if request.endpoint == 'school.dashboard' }}" href="{{ url_for('school.dashboard') }}">Dashboard</a>
+        <a class="nav-link {{ 'active' if request.endpoint == 'school.gate' }}" href="{{ url_for('school.gate') }}">Gate reader</a>
+        <a class="nav-link {{ 'active' if request.endpoint and 'student' in request.endpoint }}" href="{{ url_for('school.students') }}">Students</a>
+        <a class="nav-link {{ 'active' if request.endpoint and 'attendance' in request.endpoint }}" href="{{ url_for('school.attendance') }}">Attendance</a>
+        <a class="nav-link {{ 'active' if request.endpoint and 'alert' in request.endpoint }}" href="{{ url_for('school.alerts') }}">Parent alerts</a>
+        <a class="nav-link {{ 'active' if request.endpoint and 'membership' in request.endpoint }}" href="{{ url_for('school.membership') }}">Membership</a>
+      </nav>
+      <div class="foot">
+        <div class="who">{{ session.get('name') }}</div>
+        {% if school %}
+          <div>{{ school.days_left }} day{{ '' if school.days_left == 1 else 's' }} left on the plan</div>
+        {% endif %}
+        <form method="post" action="{{ url_for('auth.logout') }}">
+          <button class="btn ghost sm" type="submit">Sign out</button>
+        </form>
+      </div>
+    </aside>
+    <main class="main">
+      {% if queue_pending %}
+      <div class="flash {{ 'ok' if queue_online else 'error' }}">
+        {% if queue_online %}
+          Internet is back. Syncing {{ queue_pending }} saved tap{{ '' if queue_pending == 1 else 's' }} to the cloud…
+        {% else %}
+          Offline — {{ queue_pending }} tap{{ '' if queue_pending == 1 else 's' }} saved on this PC. They will upload when internet returns.
+        {% endif %}
+      </div>
+      {% endif %}
+      {% include "partials/flash.html" %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}?v=4"></script>
+</body>
+</html>
